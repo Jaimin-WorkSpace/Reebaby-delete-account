@@ -1,9 +1,8 @@
-# Reebaby — Legal Pages
+# Reebaby — Delete Account
 
-Static pages required for Google Play and App Store submissions.
+Static page used for Google Play and App Store account-deletion disclosure.
 
-- [Privacy Policy](https://jaimin-workspace.github.io/Reebaby-delete-account/privacy-policy.html)
-- [Delete Account](https://jaimin-workspace.github.io/Reebaby-delete-account/delete-account.html)
+Live URL: https://jaimin-workspace.github.io/Reebaby-delete-account/delete-account.html
 
 App: Reebaby
 Developer: Chillbaby Technologies

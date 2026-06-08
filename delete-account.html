@@ -21,40 +21,68 @@
       --success: #38A169;
       --radius: 16px;
       --shadow: 0 10px 30px rgba(0,0,0,0.06);
-      --shadow-lg: 0 20px 60px rgba(74,144,226,0.15);
+      --shadow-lg: 0 20px 60px rgba(74,144,226,0.18);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: linear-gradient(180deg, #EEF4FB 0%, #F7FAFC 400px);
+      background: linear-gradient(180deg, #E8F0FB 0%, #F7FAFC 480px);
       color: var(--text);
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
     }
-    .header {
+    .hero {
       text-align: center;
-      padding: 56px 20px 40px;
+      padding: 72px 20px 48px;
+      position: relative;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(74,144,226,0.18), transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero > * { position: relative; z-index: 1; }
+    .logo-wrap {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      background: white;
+      border-radius: 32px;
+      box-shadow: var(--shadow-lg);
+      margin-bottom: 28px;
     }
     .logo {
-      width: 96px;
-      height: 96px;
-      border-radius: 24px;
-      box-shadow: var(--shadow-lg);
-      margin-bottom: 24px;
+      width: 112px;
+      height: 112px;
+      border-radius: 26px;
+      display: block;
       background: white;
     }
-    .header h1 {
-      font-size: 36px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      color: var(--text);
-      margin-bottom: 12px;
+    .brand {
+      font-size: 14px;
+      color: var(--primary);
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
     }
-    .header .sub {
+    .hero h1 {
+      font-size: 40px;
+      font-weight: 800;
+      letter-spacing: -0.6px;
+      color: var(--text);
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+    .hero .sub {
       color: var(--text-soft);
       font-size: 17px;
-      max-width: 560px;
+      max-width: 580px;
       margin: 0 auto;
     }
     .container {
@@ -73,26 +101,34 @@
     .card-title {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       font-size: 22px;
       font-weight: 700;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
       color: var(--text);
     }
     .badge {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
-      background: var(--primary);
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       color: white;
       font-size: 16px;
       font-weight: 700;
       flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(74,144,226,0.3);
     }
-    .badge.alt { background: var(--accent); }
+    .badge.alt {
+      background: linear-gradient(135deg, var(--accent), #E54B7C);
+      box-shadow: 0 4px 12px rgba(255,107,157,0.3);
+    }
+    .badge.info {
+      background: linear-gradient(135deg, #805AD5, #6B46C1);
+      box-shadow: 0 4px 12px rgba(128,90,213,0.3);
+    }
     ol.steps {
       list-style: none;
       counter-reset: step;
@@ -100,15 +136,18 @@
     }
     ol.steps li {
       position: relative;
-      padding: 14px 16px 14px 56px;
-      margin-bottom: 8px;
+      padding: 16px 18px 16px 60px;
+      margin-bottom: 10px;
       background: var(--bg);
-      border-radius: 10px;
+      border-radius: 12px;
       counter-increment: step;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      transition: all 0.2s ease;
+      font-size: 15px;
+      color: var(--text-soft);
     }
     ol.steps li:hover {
       transform: translateX(4px);
+      background: #EDF2F7;
       box-shadow: 0 4px 12px rgba(74,144,226,0.1);
     }
     ol.steps li::before {
@@ -117,10 +156,11 @@
       left: 14px;
       top: 50%;
       transform: translateY(-50%);
-      width: 32px;
-      height: 32px;
-      background: var(--primary);
-      color: white;
+      width: 34px;
+      height: 34px;
+      background: white;
+      color: var(--primary);
+      border: 2px solid var(--primary);
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -128,31 +168,48 @@
       font-weight: 700;
       font-size: 14px;
     }
+    ol.steps li strong { color: var(--text); }
     .recommend-pill {
       display: inline-block;
-      background: rgba(56,161,105,0.1);
+      background: rgba(56,161,105,0.12);
       color: var(--success);
       font-size: 12px;
-      font-weight: 600;
-      padding: 4px 12px;
+      font-weight: 700;
+      padding: 5px 12px;
       border-radius: 100px;
-      margin-left: 8px;
+      margin-left: auto;
       vertical-align: middle;
+      letter-spacing: 0.3px;
     }
     .email-box {
       background: linear-gradient(135deg, #FFF5F8 0%, #FFEEF3 100%);
       border-left: 4px solid var(--accent);
-      padding: 20px 24px;
-      border-radius: 10px;
+      padding: 22px 26px;
+      border-radius: 12px;
       margin: 16px 0;
+    }
+    .email-box .label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-weight: 700;
     }
     .email-box a {
       color: var(--accent);
       font-weight: 600;
       text-decoration: none;
-      font-size: 16px;
+      font-size: 17px;
+      word-break: break-all;
     }
     .email-box a:hover { text-decoration: underline; }
+    .email-box .meta {
+      margin-top: 14px;
+      font-size: 14px;
+      color: var(--text-soft);
+      line-height: 1.7;
+    }
     .info-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -161,11 +218,12 @@
     }
     @media (max-width: 600px) {
       .info-grid { grid-template-columns: 1fr; }
-      .header h1 { font-size: 28px; }
+      .hero h1 { font-size: 30px; }
       .card { padding: 24px 20px; }
+      .logo { width: 96px; height: 96px; }
     }
     .info-box {
-      padding: 20px;
+      padding: 22px;
       border-radius: 12px;
       border: 1px solid var(--border);
     }
@@ -178,23 +236,22 @@
       border-color: #C6F6D5;
     }
     .info-box h3 {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 12px;
+      letter-spacing: 0.8px;
+      margin-bottom: 14px;
     }
     .info-box.deleted h3 { color: var(--danger); }
     .info-box.retained h3 { color: var(--success); }
     .info-box ul {
       list-style: none;
       padding: 0;
-      font-size: 15px;
+      font-size: 14px;
       color: var(--text-soft);
     }
     .info-box ul li {
-      padding: 6px 0;
-      padding-left: 20px;
+      padding: 5px 0 5px 22px;
       position: relative;
     }
     .info-box.deleted ul li::before {
@@ -204,7 +261,7 @@
       color: var(--danger);
       font-weight: 700;
       font-size: 18px;
-      line-height: 1;
+      line-height: 1.2;
     }
     .info-box.retained ul li::before {
       content: "\2713";
@@ -217,65 +274,73 @@
       display: flex;
       align-items: center;
       gap: 16px;
-      padding: 20px;
+      padding: 22px 24px;
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      border-radius: 12px;
+      border-radius: 14px;
       color: white;
-      margin-top: 16px;
+      margin-top: 20px;
+      box-shadow: 0 10px 25px rgba(74,144,226,0.25);
     }
     .timeline-icon {
-      width: 48px;
-      height: 48px;
-      background: rgba(255,255,255,0.2);
+      width: 52px;
+      height: 52px;
+      background: rgba(255,255,255,0.22);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
+      font-size: 24px;
       flex-shrink: 0;
     }
-    .timeline-text strong { display: block; font-size: 18px; margin-bottom: 4px; }
-    .timeline-text span { font-size: 14px; opacity: 0.9; }
+    .timeline-text strong { display: block; font-size: 17px; margin-bottom: 4px; }
+    .timeline-text span { font-size: 14px; opacity: 0.95; }
     .footer {
       text-align: center;
-      padding: 32px 20px;
+      padding: 36px 20px;
       color: var(--text-muted);
       font-size: 14px;
       border-top: 1px solid var(--border);
       margin-top: 40px;
+      background: white;
     }
-    .footer a { color: var(--primary); text-decoration: none; }
+    .footer a { color: var(--primary); text-decoration: none; font-weight: 500; }
     .footer a:hover { text-decoration: underline; }
     .footer-logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      margin-bottom: 12px;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      margin-bottom: 14px;
+    }
+    .footer-brand {
+      font-weight: 700;
+      color: var(--text);
+      font-size: 16px;
+    }
+    .footer-tag {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-top: 4px;
     }
     .meta-row {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      margin-top: 12px;
-      flex-wrap: wrap;
-    }
-    .nav-link {
-      display: inline-block;
       margin-top: 16px;
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 14px;
+      font-size: 13px;
     }
-    .nav-link:hover { text-decoration: underline; }
+    .copyright {
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
   </style>
 </head>
 <body>
 
-  <header class="header">
-    <img src="logo.png" alt="Reebaby logo" class="logo">
-    <h1>Delete Your Reebaby Account</h1>
-    <p class="sub">We respect your right to control your personal data. Choose one of the options below to permanently remove your account and associated information.</p>
+  <header class="hero">
+    <div class="logo-wrap">
+      <img src="logo.png" alt="Reebaby app icon" class="logo">
+    </div>
+    <div class="brand">Reebaby &middot; Chillbaby Technologies</div>
+    <h1>Delete Your Account</h1>
+    <p class="sub">We respect your right to control your personal data. Choose one of the options below to permanently remove your Reebaby account and all associated information.</p>
   </header>
 
   <main class="container">
@@ -294,7 +359,7 @@
         <li>Tap <strong>Delete Account</strong>.</li>
         <li>Confirm the action when prompted.</li>
       </ol>
-      <p style="margin-top: 16px; color: var(--text-soft); font-size: 15px;">Your account and data will be removed immediately after confirmation.</p>
+      <p style="margin-top: 18px; color: var(--text-soft); font-size: 15px;">Your account and data are removed immediately after confirmation.</p>
     </section>
 
     <section class="card">
@@ -302,13 +367,13 @@
         <span class="badge alt">2</span>
         Email request
       </h2>
-      <p style="color: var(--text-soft); margin-bottom: 12px;">If you cannot access the app, send a deletion request by email:</p>
+      <p style="color: var(--text-soft); margin-bottom: 14px;">If you cannot access the app, send a deletion request by email:</p>
       <div class="email-box">
-        <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">Send to</div>
+        <div class="label">Send to</div>
         <a href="mailto:support@chillbabytechnologies.com?subject=Delete%20My%20Reebaby%20Account">support@chillbabytechnologies.com</a>
-        <div style="margin-top: 14px; font-size: 14px; color: var(--text-soft);">
-          <strong>Subject:</strong> Delete My Reebaby Account<br>
-          <strong>Include:</strong> registered name, email, and phone number.
+        <div class="meta">
+          <strong style="color:var(--text);">Subject:</strong> Delete My Reebaby Account<br>
+          <strong style="color:var(--text);">Include:</strong> registered name, email, and phone number.
         </div>
       </div>
       <p style="color: var(--text-muted); font-size: 14px;">We verify your identity and process the request within 30 days.</p>
@@ -316,7 +381,7 @@
 
     <section class="card">
       <h2 class="card-title">
-        <span class="badge" style="background:#805AD5">i</span>
+        <span class="badge info">i</span>
         What happens to your data
       </h2>
       <div class="info-grid">
@@ -351,20 +416,16 @@
       </div>
     </section>
 
-    <p style="text-align:center;">
-      <a href="privacy-policy.html" class="nav-link">Read our Privacy Policy &rarr;</a>
-    </p>
-
   </main>
 
   <footer class="footer">
     <img src="logo.png" alt="Reebaby" class="footer-logo">
-    <div><strong>Reebaby</strong> by Chillbaby Technologies</div>
+    <div class="footer-brand">Reebaby</div>
+    <div class="footer-tag">by Chillbaby Technologies</div>
     <div class="meta-row">
       <a href="mailto:support@chillbabytechnologies.com">support@chillbabytechnologies.com</a>
-      <a href="privacy-policy.html">Privacy Policy</a>
     </div>
-    <div style="margin-top:12px;font-size:12px;color:var(--text-muted);">Last updated: 2026-06-08</div>
+    <div class="copyright">Last updated: 2026-06-08 &nbsp;&middot;&nbsp; &copy; Chillbaby Technologies</div>
   </footer>
 
 </body>
